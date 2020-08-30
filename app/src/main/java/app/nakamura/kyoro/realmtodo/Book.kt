@@ -9,5 +9,6 @@ open class Book(
     open var name: String = "",
     open var tag: String = "",
     open var story: String = "",
+    open var imageId: Int = 0,
     open var createdAt: Date = Date(System.currentTimeMillis())
 ) : RealmObject()

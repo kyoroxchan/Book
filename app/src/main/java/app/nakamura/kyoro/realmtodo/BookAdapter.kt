@@ -27,11 +27,11 @@ class BookAdapter(
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book: Book = bookList?.get(position) ?: return
 
-        holder.container.setOnClickListener{
+        holder.container.setOnClickListener {
             listener.onItemClick(book)
         }
 
-        holder.imageView.setImageResource(R.drawable.ic_launcher_background)
+        holder.imageView.setImageResource(book.imageId)
         holder.nameTextView.text = book.name
         holder.tagTextView.text = book.tag
         holder.dateTextView.text =
@@ -45,10 +45,10 @@ class BookAdapter(
     }
 
     class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val container : LinearLayout = view.container
+        val container: LinearLayout = view.container
         val imageView: ImageView = view.imageView
         val nameTextView: TextView = view.nameTextView
-        val tagTextView : TextView = view.tagTextView
+        val tagTextView: TextView = view.tagTextView
         val dateTextView: TextView = view.dateTextView
     }
 

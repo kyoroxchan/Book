@@ -9,6 +9,7 @@ import android.widget.Spinner
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.activity_add.view.*
+import kotlinx.android.synthetic.main.list_item.*
 import java.util.*
 
 class AddActivity : AppCompatActivity() {
@@ -43,6 +44,8 @@ class AddActivity : AppCompatActivity() {
                 val spinnerParent = parent as Spinner
                 val item = spinnerParent.selectedItem as String
                 spinneritem = item
+                val imageId = getImageId(item)
+                imageView2.setImageResource(imageId)
                 // Kotlin Android Extensions
             }
 
@@ -59,17 +62,40 @@ class AddActivity : AppCompatActivity() {
             val name: String = nameText.text.toString()
             val tag: String = spinneritem
             val story: String = storyText.text.toString()
-            create(name, tag, story)
+            val imageId = getImageId(tag)
+            create(name, tag, story, imageId)
             finish()
         }
     }
 
-    fun create(name: String, tag: String, story: String) {
+    fun create(name: String, tag: String, story: String, imageId: Int) {
         realm.executeTransaction {
             val book = it.createObject(Book::class.java, UUID.randomUUID().toString())
             book.name = name
             book.tag = tag
             book.story = story
+            book.imageId = imageId
         }
+    }
+
+    fun getImageId(tag: String):Int {
+        var imageId = 0
+
+        if (tag == "ファンタジー") {
+            imageId = R.drawable.fantaji
+        }
+        if (tag == "恋愛") {
+            imageId = R.drawable.renai
+        }
+        if (tag == "アクション") {
+            imageId = R.drawable.akusilon
+        }
+        if (tag == "ホラー") {
+            imageId = R.drawable.pien
+        }
+        if (tag == "ヒューマンドラマ") {
+            imageId = R.drawable.human
+        }
+        return imageId
     }
 }

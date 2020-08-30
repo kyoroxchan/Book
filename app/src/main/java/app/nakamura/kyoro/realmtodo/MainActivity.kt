@@ -1,17 +1,17 @@
 package app.nakamura.kyoro.realmtodo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main.*
-import java.nio.file.Files.delete
 import java.util.*
-import android.content.Intent
-import android.view.View
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,24 +54,37 @@ class MainActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun createDummyData() {
-        for (i in 0..10) {
-            create("名前", "タグ","あらすじ")
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.addButton -> {
+
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
-    fun create(name: String, tag: String, story: String) {
+
+    fun create(name: String, tag: String, story: String, imageId: Int) {
         realm.executeTransaction {
             val book = it.createObject(Book::class.java, UUID.randomUUID().toString())
             book.name = name
             book.tag = tag
             book.story = story
+            book.imageId = imageId
         }
     }
 
     fun readAll(): RealmResults<Book> {
-        return realm.where(Book::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+        return realm.where(Book::class.java).findAll().sort("createdAt", Sort.DESCENDING)
     }
+
     fun update(id: String, name: String) {
         realm.executeTransaction {
             val book = realm.where(Book::class.java).equalTo("id", id).findFirst()

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.list_item.view.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class DetailActivity : AppCompatActivity() {
         nameTextView.text = book.name
         tagTextView.text = book.tag
         storyTextView.text = book.story
+        imageView2.setImageResource(book.imageId)
 
         //戻るボタン
         backButton.setOnClickListener {
