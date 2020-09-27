@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.nakamura.kyoro.realmtodo">
+    package="app.nakamura.kyoro.Sakuhinkanriapuri">
 
     <application
-        android:name=".RealmTodoApplication"
+        android:name="app.nakamura.kyoro.Sakuhinkanriapuri.RealmTodoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".AddActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="app.nakamura.kyoro.Sakuhinkanriapuri.EditActivity"></activity>
+        <activity android:name="app.nakamura.kyoro.Sakuhinkanriapuri.SearchActivity" />
+        <activity android:name="app.nakamura.kyoro.Sakuhinkanriapuri.DetailActivity" />
+        <activity android:name="app.nakamura.kyoro.Sakuhinkanriapuri.AddActivity" />
+        <activity android:name="app.nakamura.kyoro.Sakuhinkanriapuri.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
